@@ -428,7 +428,7 @@ Review the resources in the destroy plan before confirming. Destroying the infra
 
 ## Author
 
-Eid Abokor - [GitHub](https://github.com/EidAbokor1)
+Ahmed Isaq - [GitHub](https://github.com/ahmedmisaq/)
 
 ## License
 
