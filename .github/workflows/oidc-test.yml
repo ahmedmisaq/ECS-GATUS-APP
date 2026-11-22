@@ -18,6 +18,11 @@ jobs:
           with: 
             role-to-assume: arn:aws:iam::117889972608:role/github-actions-role 
             aws-region: eu-north-1
+        - name: Check GitHub Context
+          run: |
+            echo "Repository: $GITHUB_REPOSITORY"
+            echo "Ref: $GITHUB_REF"
+            echo "Event: $GITHUB_EVENT_NAME"    
         - name: Additional steps
           run: |
             # Your commands that require AWS credentials
