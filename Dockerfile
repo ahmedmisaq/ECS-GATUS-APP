@@ -1,4 +1,3 @@
-# Build the go application into a binary
 FROM golang:alpine AS builder
 RUN addgroup -S gatus && adduser -S ahmedisaq -G gatus
 RUN apk --update add ca-certificates
