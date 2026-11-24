@@ -1,0 +1,56 @@
+name: Deploy Infrastructure 
+
+on:
+  workflow_run:
+    workflows: ["CI - Build & Push"]
+    types: [completed]
+    branches: [main]
+  
+  workflow_dispatch:   
+
+permissions:
+ id-token: write
+ contents: read
+
+env:
+    AWS_REGION: eu-north-1 
+
+
+jobs:
+  
+    deploy:
+      name: Deploy
+      runs-on: ubuntu-latest   
+
+      defaults:
+        run:
+         working-directory: ./terrform  
+
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v7
+
+        - name: Configure AWS credentials (OIDC)
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+           aws-region: ${{ env.AWS_REGION }}  
+ 
+        - name: Install Terraform
+          uses: hashicorp/setup-terraform@v4 
+          
+        - name: Terraform Init
+          id: init
+          run: terraform init -input=false
+
+        - name: Terraform Validate
+          id: validate
+          run: terraform validate 
+
+        - name: Terraform Plan
+          id: plan
+          run: terraform plan -no-color -input=false
+
+#        - name: Terraform Apply
+#          id: apply
+#          run: terraform apply -auto-approve  
