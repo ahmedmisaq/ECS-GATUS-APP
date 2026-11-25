@@ -4,17 +4,20 @@ terraform {
       source  = "hashicorp/aws"
       version = "6.68.0"
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "~> 5.0"
+    }
   }
 }
-
 provider "aws" {
-  region = "eu-west-1"
+  region = "eu-north-1"
 
   default_tags {
     tags = {
-      project    = "ecs-gatus"
-      managedby  = "tf"
-      enviroment = "production"
+      project     = "ecs-gatus"
+      managedby   = "tf"
+      environment = "production"
     }
   }
 }
