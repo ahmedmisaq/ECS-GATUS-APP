@@ -1,10 +1,9 @@
-resource "aws_s3_bucket" "state" {
-  bucket = "gatus-backend-ecs2"
-}
-
-resource "aws_s3_bucket_versioning" "state" {
-  bucket = aws_s3_bucket.state.id
-  versioning_configuration {
-    status = "Enabled"
+terraform {
+  backend "s3" {
+    bucket       = "gatus-remote-state432102"
+    key          = "ECS_GATUS/terraform/terraform.tfstate"
+    region       = "eu-north-1"
+    encrypt      = true
+    use_lockfile = true
   }
 }
