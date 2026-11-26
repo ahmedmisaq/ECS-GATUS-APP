@@ -34,6 +34,9 @@ jobs:
           with:
            role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
            aws-region: ${{ env.AWS_REGION }}  
+        
+        - name: Set Cloudflare API Token
+          run: echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> $GITHUB_ENV
  
         - name: Install Terraform
           uses: hashicorp/setup-terraform@v4 
