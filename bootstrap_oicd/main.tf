@@ -161,6 +161,23 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
     ]
    resources = ["*"]
   }
+
+    statement {
+    sid    = "EC2ReadAccess"
+    effect = "Allow"
+
+    actions = [
+      "ec2:DescribeRouteTables",
+      "ec2:DescribeAddresses",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeNatGateways",
+      "ec2:DescribeInternetGateways"
+    ]
+
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "Route_table_Access_Policy_attachment" {
