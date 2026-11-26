@@ -13,9 +13,8 @@ permissions:
  contents: read
 
 env:
-    AWS_REGION: eu-north-1 
-
-
+    AWS_REGION: eu-north-1
+    TF_VAR_ecr_sha: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.sha }}
 jobs:
   
     deploy:
@@ -47,6 +46,13 @@ jobs:
           id: validate
           run: terraform validate 
 
+        - name: Verify image SHA
+          run: |
+             if [ -z "$TF_VAR_ecr_sha" ]; then
+              echo "ERROR: ECR SHA is missing"
+              exit 1
+             fi
+             echo "Deploying image SHA: $TF_VAR_ecr_sha"
         - name: Terraform Plan
           id: plan
           run: terraform plan -no-color -input=false
