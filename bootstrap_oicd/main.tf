@@ -124,7 +124,8 @@ data "aws_iam_policy_document" "github_actions_s3_access" {
       "s3:GetObject",
       "s3:PutObject",
       "s3:DeleteObject",
-      "S3:GetBucketEncryption"
+      "S3:GetBucketEncryption",
+      "s3:GetEncryptionConfiguration"
     ]
 
     resources = [
@@ -193,11 +194,11 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
         "ecr:DescribeRepositories",
         "acm:DescribeCertificate",
         "ecs:DescribeClusters", 
-        "S3: GetBucketEncryption",
-        "EC2: DescribeVpcAttribute",
+        "s3:GetEncryptionConfiguration",
+        "ec2:DescribeVpcAttribute",
         "EC2: DescribeAvailabilityZones",
-        "ACM: ListTagsForCertificate",
-        "ECR: ListTagsForResource"
+        "acm:ListTagsForCertificate",
+        "ecr:ListTagsForResource"
 
     ]
   resources = ["*"]
