@@ -173,11 +173,31 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
       "ec2:DescribeSubnets",
       "ec2:DescribeSecurityGroups",
       "ec2:DescribeNatGateways",
-      "ec2:DescribeInternetGateways"
+      "ec2:DescribeInternetGateways",
+      "ec2:DescribeAddressesAttribute"
     ]
 
     resources = ["*"]
   }
+
+    statement {
+      sid = "IAMReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "iam:Generate*",
+        "iam:Get*",
+        "iam:List*",
+        "s3:GetBucketPolicy",
+        "ecr:DescribeRepositories",
+        "acm:DescribeCertificate",
+        "ecs:DescribeClusters", 
+        "S3: GetBucketEncryption",
+        "EC2: DescribeVpcAttribute",
+        "EC2: DescribeAvailabilityZones"
+    ]
+  resources = ["*"]
+    }
 }
 
 resource "aws_iam_role_policy_attachment" "Route_table_Access_Policy_attachment" {
