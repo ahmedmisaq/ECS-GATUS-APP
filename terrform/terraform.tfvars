@@ -1,0 +1,9 @@
+vpc_cidr            = "10.0.0.0/22"
+public_subnet_cidr  = ["10.0.0.0/25", "10.0.0.128/25"]
+private_subnet_ids = ["10.0.1.0/25", "10.0.1.128/25"]
+ecr                 = "gatus-terraform-ecr"
+sg                  = "gatus-terraform-sg"
+sg_ecs              = "gatus-terraform-sg-ecs"
+alb                 = "gatus-terraform-alb"
+s3_alb              = "ALB S3 logs"
+domain_name         = "gatus.aisaq.co.uk"
