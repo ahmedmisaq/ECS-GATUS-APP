@@ -159,14 +159,8 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
     actions = [
       "ec2:DescribeRouteTables",
     ]
-    resources = [
-      data.aws_route_table.Gatus_Public_Route.arn
-    ]
+   resources = ["*"]
   }
-}
-
-data "aws_route_table" "Gatus_Public_Route" {
-  route_table_id = "rtb-0be727367fd5e6022"
 }
 
 resource "aws_iam_role_policy_attachment" "Route_table_Access_Policy_attachment" {
