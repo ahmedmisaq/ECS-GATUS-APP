@@ -135,3 +135,41 @@ data "aws_iam_policy_document" "github_actions_s3_access" {
 data "aws_s3_bucket" "tf_remote_state" {
   bucket = "gatus-remote-state432102"
 }
+
+
+
+
+
+
+
+# Route table permission
+
+
+resource "aws_iam_policy" "github_route_table_policy" {
+  name        = "Route_table_Access_Policy"
+  path        = "/"
+  description = "My Route table_Access policy"
+  policy      = data.aws_iam_policy_document.github_actions_route_table_access.json
+}
+
+
+data "aws_iam_policy_document" "github_actions_route_table_access" {
+  statement {
+
+    actions = [
+      "ec2:DescribeRouteTables",
+    ]
+    resources = [
+      data.aws_route_table.Gatus_Public_Route.arn
+    ]
+  }
+}
+
+data "aws_route_table" "Gatus_Public_Route" {
+  route_table_id = "rtb-0be727367fd5e6022"
+}
+
+resource "aws_iam_role_policy_attachment" "Route_table_Access_Policy_attachment" {
+  role       = aws_iam_role.github_actions_role.name
+  policy_arn = aws_iam_policy.github_route_table_policy.arn
+}
