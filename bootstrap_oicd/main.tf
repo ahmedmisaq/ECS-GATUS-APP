@@ -196,12 +196,42 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
         "ecs:DescribeClusters", 
         "s3:GetEncryptionConfiguration",
         "ec2:DescribeVpcAttribute",
-        "EC2: DescribeAvailabilityZones",
+        "EC2:DescribeAvailabilityZones",
         "acm:ListTagsForCertificate",
         "ecr:ListTagsForResource"
-
     ]
-  resources = ["*"]
+    resources = ["*"]
+    }
+
+statement {
+      sid = "ACMReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "acm:ListTagsForCertificate"
+    ]
+        resources = "arn:aws:acm:eu-north-1:117889972608:certificate/ca00e948-28a9-4130-ad90-ef5e519c42f5"
+    }
+
+    statement {
+      sid = "ECRReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "ecr:ListTagsForResource"
+    ]
+        resources = "arn:aws:ecr:eu-north-1:117889972608:repository/gatus-terraform-ecr"
+    }
+
+
+    statement {
+      sid = "E3ReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "s3:GetEncryptionConfiguration"
+    ]
+        resources = "arn:aws:s3:::gatus-alb-logs-345678"
     }
 }
 
