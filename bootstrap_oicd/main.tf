@@ -225,7 +225,7 @@ statement {
 
 
     statement {
-      sid = "E3ReadAccess"
+      sid = "S3ReadAccess"
       effect = "Allow"
 
     actions = [
@@ -233,7 +233,29 @@ statement {
     ]
         resources = ["arn:aws:s3:::gatus-alb-logs-345678"]
     }
+
+
+    statement {
+      sid = "ELBReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "elasticloadbalancing:DescribeLoadBalancers"
+    ]
+        resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:loadbalancer/app/gatus-terraform-alb/9b0ec9602a657d3a"]
+    }
+
+     statement {
+      sid = "ELBReadAccess"
+      effect = "Allow"
+
+    actions = [
+        "elasticloadbalancing:DescribeTargetGroups"
+    ]
+        resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:targetgroup/tf-8fddc1f323a050b901b76d7336/f3836fb6a07b1851"]
+    }
 }
+
 
 resource "aws_iam_role_policy_attachment" "Route_table_Access_Policy_attachment" {
   role       = aws_iam_role.github_actions_role.name
