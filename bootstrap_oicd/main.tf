@@ -210,7 +210,7 @@ statement {
     actions = [
         "acm:ListTagsForCertificate"
     ]
-        resources = "arn:aws:acm:eu-north-1:117889972608:certificate/ca00e948-28a9-4130-ad90-ef5e519c42f5"
+        resources = ["arn:aws:acm:eu-north-1:117889972608:certificate/ca00e948-28a9-4130-ad90-ef5e519c42f5"]
     }
 
     statement {
@@ -220,7 +220,7 @@ statement {
     actions = [
         "ecr:ListTagsForResource"
     ]
-        resources = "arn:aws:ecr:eu-north-1:117889972608:repository/gatus-terraform-ecr"
+        resources = ["arn:aws:ecr:eu-north-1:117889972608:repository/gatus-terraform-ecr"]
     }
 
 
@@ -231,7 +231,7 @@ statement {
     actions = [
         "s3:GetEncryptionConfiguration"
     ]
-        resources = "arn:aws:s3:::gatus-alb-logs-345678"
+        resources = ["arn:aws:s3:::gatus-alb-logs-345678"]
     }
 }
 
