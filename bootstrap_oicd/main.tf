@@ -161,10 +161,10 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
     actions = [
       "ec2:DescribeRouteTables",
     ]
-    resources = ["*"]
+   resources = ["*"]
   }
 
-  statement {
+    statement {
     sid    = "EC2ReadAccess"
     effect = "Allow"
 
@@ -182,78 +182,90 @@ data "aws_iam_policy_document" "github_actions_route_table_access" {
     resources = ["*"]
   }
 
-  statement {
-    sid    = "IAMReadAccess"
-    effect = "Allow"
+    statement {
+      sid = "IAMReadAccess"
+      effect = "Allow"
 
     actions = [
-      "iam:Generate*",
-      "iam:Get*",
-      "iam:List*",
-      "s3:GetBucketPolicy",
-      "ecr:DescribeRepositories",
-      "acm:DescribeCertificate",
-      "ecs:DescribeClusters",
-      "s3:GetEncryptionConfiguration",
-      "ec2:DescribeVpcAttribute",
-      "EC2:DescribeAvailabilityZones",
-      "acm:ListTagsForCertificate",
-      "ecr:ListTagsForResource"
+        "iam:Generate*",
+        "iam:Get*",
+        "iam:List*",
+        "s3:GetBucketPolicy",
+        "ecr:DescribeRepositories",
+        "acm:DescribeCertificate",
+        "ecs:DescribeClusters", 
+        "s3:GetEncryptionConfiguration",
+        "ec2:DescribeVpcAttribute",
+        "EC2:DescribeAvailabilityZones",
+        "acm:ListTagsForCertificate",
+        "ecr:ListTagsForResource"
     ]
     resources = ["*"]
-  }
+    }
 
-  statement {
-    sid    = "ACMReadAccess"
-    effect = "Allow"
-
-    actions = [
-      "acm:ListTagsForCertificate"
-    ]
-    resources = ["arn:aws:acm:eu-north-1:117889972608:certificate/ca00e948-28a9-4130-ad90-ef5e519c42f5"]
-  }
-
-  statement {
-    sid    = "ECRReadAccess"
-    effect = "Allow"
+statement {
+      sid = "ACMReadAccess"
+      effect = "Allow"
 
     actions = [
-      "ecr:ListTagsForResource"
+        "acm:ListTagsForCertificate"
     ]
-    resources = ["arn:aws:ecr:eu-north-1:117889972608:repository/gatus-terraform-ecr"]
-  }
+        resources = ["arn:aws:acm:eu-north-1:117889972608:certificate/ca00e948-28a9-4130-ad90-ef5e519c42f5"]
+    }
 
-
-  statement {
-    sid    = "S3ReadAccess"
-    effect = "Allow"
+    statement {
+      sid = "ECRReadAccess"
+      effect = "Allow"
 
     actions = [
-      "s3:GetEncryptionConfiguration"
+        "ecr:ListTagsForResource"
     ]
-    resources = ["arn:aws:s3:::gatus-alb-logs-345678"]
-  }
+        resources = ["arn:aws:ecr:eu-north-1:117889972608:repository/gatus-terraform-ecr"]
+    }
 
 
-  statement {
-    sid    = "ELBReadAccess"
-    effect = "Allow"
+    statement {
+      sid = "S3ReadAccess"
+      effect = "Allow"
 
     actions = [
-      "elasticloadbalancing:DescribeLoadBalancers"
+        "s3:GetEncryptionConfiguration"
     ]
-    resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:loadbalancer/app/gatus-terraform-alb/9b0ec9602a657d3a"]
-  }
+        resources = ["arn:aws:s3:::gatus-alb-logs-345678"]
+    }
 
-  statement {
-    sid    = "ELLTGReadAccess"
-    effect = "Allow"
 
-    actions = [
-      "elasticloadbalancing:DescribeTargetGroups"
-    ]
-    resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:targetgroup/tf-8fddc1f323a050b901b76d7336/f3836fb6a07b1851"]
-  }
+    statement {
+      sid = "ELBReadAccess"
+      effect = "Allow"
+
+        actions = [
+        "elasticloadbalancing:DescribeLoadBalancers"
+        ]
+        
+        resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:loadbalancer/app/gatus-terraform-alb/9b0ec9602a657d3a"]
+    }
+
+     statement {
+      sid = "ELLTGReadAccess"
+      effect = "Allow"
+
+        actions = [
+            "elasticloadbalancing:DescribeTargetGroups"
+        ]
+        resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:targetgroup/tf-8fddc1f323a050b901b76d7336/f3836fb6a07b1851"]
+    }
+
+
+      statement {
+      sid = "ELBv2LoadbalancerReadAccess"
+      effect = "Allow"
+
+        actions = [
+            "elasticloadbalancing:DescribeLoadBalancers"
+        ]
+        resources = ["arn:aws:elasticloadbalancing:eu-north-1:117889972608:loadbalancer/app/gatus-terraform-alb/9b0ec9602a657d3a"]
+    }
 }
 
 
